@@ -1,4 +1,4 @@
-import { FIELDS } from "./App";
+import { FLATTENED_FIELDS } from "./NameAndGenderForm";
 
 type TInvalidState = {
   fullname: boolean;
@@ -19,34 +19,34 @@ export default function validate(
   setAnyInputsInvalid: (arg0: boolean) => void,
 ) {
   let foundInvalid = false;
-  FIELDS.forEach((field) => {
-    if (
-      field.required &&
-      fieldState[field.id] === "" &&
-      ((form === "feeWaiver" && field.feeWaiverFields) ||
-        (form === "statewidePacket" && field.statewidePacketFields))
-    ) {
-      foundInvalid = true;
-      setInvalidState((oldState: TInvalidState) => ({
-        ...oldState,
-        [field.id]: true,
-      }));
-    } else if (
-      field.validation &&
-      !field.validation(fieldState[field.id] as string, fieldState)
-    ) {
-      foundInvalid = true;
-      setInvalidState((oldState: TInvalidState) => ({
-        ...oldState,
-        [field.id]: true,
-      }));
-    } else {
-      setInvalidState((oldState: TInvalidState) => ({
-        ...oldState,
-        [field.id]: false,
-      }));
-    }
-  });
+  FLATTENED_FIELDS.forEach((field) => {
+      if (
+        field.required &&
+        fieldState[field.id] === "" &&
+        ((form === "feeWaiver" && field.feeWaiverFields) ||
+          (form === "statewidePacket" && field.statewidePacketFields))
+      ) {
+        foundInvalid = true;
+        setInvalidState((oldState: TInvalidState) => ({
+          ...oldState,
+          [field.id]: true,
+        }));
+      } else if (
+        field.validation &&
+        !field.validation(fieldState[field.id] as string, fieldState)
+      ) {
+        foundInvalid = true;
+        setInvalidState((oldState: TInvalidState) => ({
+          ...oldState,
+          [field.id]: true,
+        }));
+      } else {
+        setInvalidState((oldState: TInvalidState) => ({
+          ...oldState,
+          [field.id]: false,
+        }));
+      }
+    });
 
   setAnyInputsInvalid(foundInvalid);
   return !foundInvalid;

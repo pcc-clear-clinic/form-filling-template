@@ -1,10 +1,6 @@
 import { format } from "date-fns";
 import { PDFDocument } from "pdf-lib";
-import { FIELDS } from "./App";
-import {
-  feeWaiverCheckboxList,
-  statewidePacketCheckboxList,
-} from "./fieldsList";
+import { FLATTENED_FIELDS, Field } from "./NameAndGenderForm";
 
 const FEE_WAIVER_CHECKED_LIST = [
   "plaintiffpetitioner", // CHECKED "I am the plaintiff"
@@ -25,11 +21,7 @@ export async function fillAndDownloadFeeWaiver(fieldState: any) {
 
   const form = pdfDoc.getForm();
 
-  // form.getFields().forEach((field) => {
-  //   console.log("field:", field.getName());
-  // });
-
-  FIELDS.forEach((field) => {
+  FLATTENED_FIELDS.forEach((field : Field) => {
     if (field.feeWaiverFields) {
       field.feeWaiverFields.forEach((feeWaiverField) => {
         if (field.checkbox) {
@@ -49,14 +41,6 @@ export async function fillAndDownloadFeeWaiver(fieldState: any) {
   // Always-checked fields:
   FEE_WAIVER_CHECKED_LIST.forEach((field) => form.getCheckBox(field).check());
 
-  /*
-  form.getFields().forEach((field) => {
-    if (!feeWaiverCheckboxList.includes(field.getName())) {
-      const myField = form.getTextField(field.getName());
-      myField.setText(field.getName());
-    }
-  });
-  */
 
   form
     .getTextField("Name printed")
@@ -122,9 +106,6 @@ export async function fillAndDownloadFeeWaiver(fieldState: any) {
   );
   totalExpensesField.setText(`${totalMonthyExpenses.toFixed(2)}`);
 
-  // const signatureField = form.getTextField("Signature");
-  // signatureField.setText(`\\s\\ ${fieldState.fullname}`);
-
   const todaysDateField = form.getTextField("Date");
   todaysDateField.setText(format(new Date(), "MM/dd/yyyy"));
 
@@ -143,16 +124,7 @@ export async function fillAndDownloadStatewidePacket(fieldState: any) {
 
   const form = pdfDoc.getForm();
 
-  /*
-  form.getFields().forEach((field) => {
-    if (!statewidePacketCheckboxList.includes(field.getName())) {
-      const myField = form.getTextField(field.getName());
-      myField.setText(field.getName());
-    }
-  });
-  */
-
-  FIELDS.forEach((field) => {
+  FLATTENED_FIELDS.forEach((field) => {
     if (field.statewidePacketFields) {
       field.statewidePacketFields.forEach((statewidePacketField) => {
         if (field.checkbox) {
@@ -177,9 +149,6 @@ export async function fillAndDownloadStatewidePacket(fieldState: any) {
       });
     }
   });
-
-  // const formField = form.getTextField("Signature");
-  // formField.setText(`\\s\\ ${fieldState.fullname}`);
 
   const todaysDateField = form.getTextField("Date");
   todaysDateField.setText(format(new Date(), "MM/dd/yyyy"));
