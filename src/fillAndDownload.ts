@@ -157,7 +157,7 @@ export async function fillAndDownloadStatewidePacket(fieldState: any) {
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
   const link = document.createElement("a");
   link.href = window.URL.createObjectURL(blob);
-  link.download = "statewidePacketFilled.pdf";
+  link.download = `statewidePacketFilled.pdf`;
 
   fetch("https://api.jsonbin.io/v3/b/6400e55eebd26539d088234e", {
     headers: {
