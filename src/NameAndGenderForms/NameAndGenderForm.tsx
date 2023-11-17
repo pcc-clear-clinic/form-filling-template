@@ -2,7 +2,7 @@ import { HelpOutline } from "@mui/icons-material";
 import { Button, Checkbox, Tooltip } from "@mui/material";
 import moment from "moment";
 import React, { useState } from "react";
-import { FieldEntry } from "./FieldEntry";
+import { FieldEntry } from "../components/FieldEntry";
 import {
   fillAndDownloadFeeWaiver,
   fillAndDownloadStatewidePacket,
@@ -65,7 +65,7 @@ export type Field = {
 export const FIELDS_IN_SECTIONS: [React.ReactNode, Field[]][] = [
   [
     "Vitals",
-    [ 
+    [
       {
         id: "county",
         label: "Filing County",
@@ -122,7 +122,6 @@ export const FIELDS_IN_SECTIONS: [React.ReactNode, Field[]][] = [
   [
     "New Name and/or Gender",
     [
-      // CHANGES (7 to 13)
       {
         id: "changeOfName",
         label: "Change of Name",
@@ -562,7 +561,7 @@ function NameAndGenderForm() {
   const [invalidState, setInvalidState] = useState<any>(INITIAL_INVALID_STATE);
   const [anyInputsInvalid, setAnyInputsInvalid] = useState(false);
   const [isValidationDisabled, setIsValidationDisabled] = useState(false);
-  
+
   const handleChange = (e: React.BaseSyntheticEvent) => {
     setFieldState((oldState: any) => {
       return {
@@ -652,7 +651,7 @@ function NameAndGenderForm() {
           )}
         </div>
       </div>
-      
+
       <div>
         <Button
           variant="contained"
@@ -668,7 +667,6 @@ function NameAndGenderForm() {
         />{" "}
         Disable Validation
       </div>
-      
     </div>
   );
 }

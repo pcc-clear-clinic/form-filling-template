@@ -1,5 +1,5 @@
 import "./App.css";
-import NameAndGenderForm from "./NameAndGenderForm";
+import NameAndGenderForm from "./NameAndGenderForms/NameAndGenderForm";
 
 
 function App() {
