@@ -36,6 +36,7 @@ export const EVICTION_FIELDS_IN_SECTIONS: [
   ["Section 2", []],
 ];
 
+// This is just another way to access the same information, but in a single array instead of in sections.
 export const EVICTION_FLATTENED_FIELDS: EvictionFormField[] =
 EVICTION_FIELDS_IN_SECTIONS.flatMap(([, fields]) => fields);
 
