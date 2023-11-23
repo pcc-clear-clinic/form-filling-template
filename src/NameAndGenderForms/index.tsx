@@ -2,29 +2,21 @@ import { HelpOutline } from "@mui/icons-material";
 import { Button, Checkbox, Tooltip } from "@mui/material";
 import moment from "moment";
 import React, { useState } from "react";
-import { FieldEntry } from "../components/FieldEntry";
 import {
   fillAndDownloadFeeWaiver,
   fillAndDownloadStatewidePacket,
 } from "./fillAndDownload";
 import validate, { INITIAL_INVALID_STATE } from "./validate";
 import { COUNTIES } from "../components/constants";
-import { handleChange, handleCheckboxChange } from "../components/inputHandlers";
+import FillableFieldsSet from "../components/FillableFieldsSet";
+import { Field } from "../components/inputHandlersAndTypes";
 
-export type Field = {
-  id: string;
-  label: string;
-  required?: boolean;
-  validation?: (arg: any, fieldState: any) => boolean;
-  selectionList?: string[];
+export type NameAndGenderFormField = Field & {
   feeWaiverFields?: string[];
   statewidePacketFields?: string[];
-  checkbox?: boolean;
-  disabled?: (arg0: any) => boolean;
-  tooltip?: string;
 };
 
-export const FIELDS_IN_SECTIONS: [React.ReactNode, Field[]][] = [
+export const FIELDS_IN_SECTIONS: [React.ReactNode, NameAndGenderFormField[]][] = [
   [
     "Vitals",
     [
@@ -420,7 +412,7 @@ export const FIELDS_IN_SECTIONS: [React.ReactNode, Field[]][] = [
   ],
 ];
 
-export const FLATTENED_FIELDS: Field[] = FIELDS_IN_SECTIONS.flatMap(
+export const FLATTENED_FIELDS: NameAndGenderFormField[] = FIELDS_IN_SECTIONS.flatMap(
   ([, fields]) => fields,
 );
 
@@ -550,35 +542,13 @@ function NameAndGenderForm() {
   return (
     <div className="FormFillingPage">
       <div className="row">
-        <div>
-          <form>
-            {FIELDS_IN_SECTIONS.map((section) => {
-              return (
-                <>
-                  <h3>{section[0]}</h3>
-                  {section[1].map((field) => {
-                    return (
-                      <FieldEntry
-                        id={field.id}
-                        label={field.label}
-                        required={field.required}
-                        checkbox={field.checkbox}
-                        selectionList={field.selectionList}
-                        disabled={field.disabled}
-                        handleChange={(e)=>handleChange(e, setFieldState)}
-                        handleCheckboxChange={(e)=>handleCheckboxChange(e, setFieldState)}
-                        fieldState={fieldState}
-                        invalidState={invalidState}
-                        tooltip={field.tooltip}
-                        key={field.id}
-                      />
-                    );
-                  })}
-                </>
-              );
-            })}
-          </form>
-        </div>
+        <FillableFieldsSet
+          FIELDS_IN_SECTIONS={[]}
+          fieldState={fieldState}
+          invalidState={invalidState}
+          setFieldState={setFieldState}
+          setIsValidationDisabled={setIsValidationDisabled}
+        />
         <div>
           <div className="card">
             <button onClick={() => handleStatewidePacketSubmit()}>

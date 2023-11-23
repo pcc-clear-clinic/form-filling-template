@@ -11,7 +11,7 @@ export default function FrontPage() {
         </Button>
       </div>
       <div>
-        <Button component={Link} to="/gender">
+        <Button component={Link} to="/eviction">
           Eviction Expungement
         </Button>
       </div>

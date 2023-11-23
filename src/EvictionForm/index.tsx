@@ -1,23 +1,19 @@
 import React, { useState } from "react";
-import { FieldEntry } from "../components/FieldEntry";
 import { fillAndDownloadEvictionExpungement } from "./fillAndDownload";
 import validate, { INITIAL_INVALID_STATE } from "./validate";
 import { COUNTIES } from "../components/constants";
-import { handleChange, handleCheckboxChange } from "../components/inputHandlers";
+import FillableFieldsSet from "../components/FillableFieldsSet";
+import { Button, Checkbox } from "@mui/material";
+import { Field } from "../components/inputHandlersAndTypes";
 
-export type EvictionFormField = {
-  id: string;
-  label: string;
-  required?: boolean;
-  validation?: (arg: any, fieldState: any) => boolean;
-  selectionList?: string[];
-  pdfFields?: string[];
-  checkbox?: boolean;
-  disabled?: (arg0: any) => boolean;
-  tooltip?: string;
+export type EvictionFormField = Field & {
+  evictionPdfFields?: string[];
 };
 
-export const FIELDS_IN_SECTIONS: [React.ReactNode, EvictionFormField[]][] = [
+export const EVICTION_FIELDS_IN_SECTIONS: [
+  React.ReactNode,
+  EvictionFormField[],
+][] = [
   [
     "Section 1",
     [
@@ -26,23 +22,22 @@ export const FIELDS_IN_SECTIONS: [React.ReactNode, EvictionFormField[]][] = [
         label: "Filing County",
         selectionList: COUNTIES,
         required: true,
-        pdfFields: ["IN THE CIRCUIT COURT OF THE STATE OF OREGON"],
+        evictionPdfFields: ["IN THE CIRCUIT COURT OF THE STATE OF OREGON"],
         tooltip: "some explanation",
       },
       {
         id: "fullname",
         label: "Name (First Middle Last)",
         required: true,
-        pdfFields: ["IN THE CIRCUIT COURT OF THE STATE OF OREGON"],
+        evictionPdfFields: ["v 1"],
       },
     ],
   ],
   ["Section 2", []],
 ];
 
-export const FLATTENED_FIELDS: EvictionFormField[] = FIELDS_IN_SECTIONS.flatMap(
-  ([, fields]) => fields,
-);
+export const EVICTION_FLATTENED_FIELDS: EvictionFormField[] =
+EVICTION_FIELDS_IN_SECTIONS.flatMap(([, fields]) => fields);
 
 const INITIAL_FIELD_STATE = {
   fullname: "",
@@ -50,7 +45,7 @@ const INITIAL_FIELD_STATE = {
 };
 
 const DEMO_INITIAL_FIELD_STATE = {
-  fullname: "Quinn Doe",
+  fullname: "Fake name",
   county: "",
 };
 
@@ -63,12 +58,7 @@ function EvictionForm() {
   const handleEvictionExpungementSubmit = () => {
     if (
       !isValidationDisabled &&
-      !validate(
-        "statewidePacket",
-        fieldState,
-        setInvalidState,
-        setAnyInputsInvalid,
-      )
+      !validate(fieldState, setInvalidState, setAnyInputsInvalid)
     )
       return;
     fillAndDownloadEvictionExpungement(fieldState);
@@ -77,39 +67,17 @@ function EvictionForm() {
   return (
     <div className="FormFillingPage">
       <div className="row">
-        <div>
-          <form>
-            {FIELDS_IN_SECTIONS.map((section) => {
-              return (
-                <>
-                  <h3>{section[0]}</h3>
-                  {section[1].map((field) => {
-                    return (
-                      <FieldEntry
-                        id={field.id}
-                        label={field.label}
-                        required={field.required}
-                        checkbox={field.checkbox}
-                        selectionList={field.selectionList}
-                        disabled={field.disabled}
-                        handleChange={(e)=>handleChange(e, setFieldState)}
-                        handleCheckboxChange={(e)=>handleCheckboxChange(e, setFieldState)}
-                        fieldState={fieldState}
-                        invalidState={invalidState}
-                        tooltip={field.tooltip}
-                        key={field.id}
-                      />
-                    );
-                  })}
-                </>
-              );
-            })}
-          </form>
-        </div>
+        <FillableFieldsSet
+          FIELDS_IN_SECTIONS={EVICTION_FIELDS_IN_SECTIONS}
+          fieldState={fieldState}
+          invalidState={invalidState}
+          setFieldState={setFieldState}
+          setIsValidationDisabled={setIsValidationDisabled}
+        />
         <div>
           <div className="card">
             <button onClick={() => handleEvictionExpungementSubmit()}>
-              Download Statewide Packet
+              Download
             </button>
           </div>
 
@@ -119,6 +87,21 @@ function EvictionForm() {
             </div>
           )}
         </div>
+      </div>
+      <div>
+        <Button
+          variant="contained"
+          onClick={() => setFieldState(DEMO_INITIAL_FIELD_STATE)}
+        >
+          Populate fields
+        </Button>
+      </div>
+      <div>
+        <Checkbox
+          value={isValidationDisabled}
+          onChange={() => setIsValidationDisabled((oldState) => !oldState)}
+        />{" "}
+        Disable Validation
       </div>
     </div>
   );

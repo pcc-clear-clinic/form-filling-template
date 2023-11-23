@@ -16,3 +16,15 @@ export const handleCheckboxChange = (fieldId: string, setFieldStateFn: (arg0: an
     };
   });
 };
+
+
+export type Field = {
+  id: string;
+  label: string;
+  required?: boolean;
+  validation?: (arg: any, fieldState: any) => boolean;
+  selectionList?: string[];
+  checkbox?: boolean;
+  disabled?: (arg0: any) => boolean;
+  tooltip?: string;
+};

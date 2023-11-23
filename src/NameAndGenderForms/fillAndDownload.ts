@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { PDFDocument } from "pdf-lib";
-import { FLATTENED_FIELDS, Field } from ".";
+import { FLATTENED_FIELDS, NameAndGenderFormField } from ".";
 
 const FEE_WAIVER_CHECKED_LIST = [
   "plaintiffpetitioner", // CHECKED "I am the plaintiff"
@@ -15,13 +15,13 @@ const FEE_WAIVER_CHECKED_LIST = [
 ];
 
 export async function fillAndDownloadFeeWaiver(fieldState: any) {
-  const formUrl = "https://wittejm.github.io/clearclinic/FeeWaiver.pdf";
+  const formUrl = "https://pccclearclinic.github.io/form-filling/pdfs/FeeWaiver.pdf";
   const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
   const pdfDoc = await PDFDocument.load(formPdfBytes);
 
   const form = pdfDoc.getForm();
 
-  FLATTENED_FIELDS.forEach((field : Field) => {
+  FLATTENED_FIELDS.forEach((field : NameAndGenderFormField) => {
     if (field.feeWaiverFields) {
       field.feeWaiverFields.forEach((feeWaiverField) => {
         if (field.checkbox) {
@@ -118,7 +118,7 @@ export async function fillAndDownloadFeeWaiver(fieldState: any) {
 }
 
 export async function fillAndDownloadStatewidePacket(fieldState: any) {
-  const formUrl = "https://wittejm.github.io/clearclinic/StatewidePacket.pdf";
+  const formUrl = "https://pccclearclinic.github.io/form-filling/pdfs/NameAndGenderStatewidePacket.pdf";
   const formPdfBytes = await fetch(formUrl).then((res) => res.arrayBuffer());
   const pdfDoc = await PDFDocument.load(formPdfBytes);
 
