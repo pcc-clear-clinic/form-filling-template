@@ -6,20 +6,20 @@
 
 ## To add a new form:
 
-(steps 1-4 have been completed for EvictionForm already)
+(this has been completed for EvictionForm already)
  1. Copy the EvictionForm folder and its contents, and rename it to SomethingForm.
  2. Add an entry in App.tsx using this new component with a new "path" name. This will be the url path to the new page.
  3. Add the pdf file to the pdfs directory.
  4. Add an entry on FrontPage.tsx to make a link to the new component. (this could wait until you're done implementing the new form, in order to not expose incomplete work)
  
- ## To customize a form (including Eviction)
+ ## To customize a form
 
  1. use the utility script examinePdf.ts to see the names of the pdf fields in the file. To do this:
     * update the url to the new file in the script. The url you already see there won't have the new file in that folder yet until you commit and push changes (see below)
     * compile the file into js by running this in the project root: `npx tsc`
     * run it with `node dist/examinePdf.js`
  2. In the new `index.tsx` file, Rename `EvictionFormField` and its child field to something appropriate. 
- 3.  Rename `EVICTION_FIELDS_IN_SECTIONS` and populate it with the field the user needs to input in the app. 
+ 3.  For a new form, rename `EVICTION_FIELDS_IN_SECTIONS` and populate it with the field the user needs to input in the app. 
   * In the variable definition, the type signature `: [React.ReactNode, EvictionFormField[]]` indicates that the allowed type format is an array pairs of `React.ReactNode` type and an array of `EvictionFormField` type. The first is the section header: `React.ReactNode` type is anything that renders as valid react code, including raw text. The react type means that a section header can be more complex than just text, namely have an attached tooltip or something. See NameAndGenderForm for an example of this, as the "Waiver Requirements" header.
   * `EvictionFormField` is the type that specifies the fields in each entry that this data structure can contain. See comments on the `Field` type in `inputHandlersAndTypes.ts` for explanations of what goes into this field definition. The type `EvictionFormField = Field & {...}` means that `EvictionFormField` is a subtype of `Field`; it contains all the variables in `Field` and any extra that are defined here.
   * `INITIAL_FIELD_STATE` needs to contain an entry for each field in the list of fields defined above.
