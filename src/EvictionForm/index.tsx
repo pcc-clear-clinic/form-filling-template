@@ -75,7 +75,7 @@ function EvictionForm() {
   };
 
   return (
-    <div className="NameAndGenderForm">
+    <div className="FormFillingPage">
       <div className="row">
         <div>
           <form>

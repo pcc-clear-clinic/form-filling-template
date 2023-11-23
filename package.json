@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d dist"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -30,5 +32,6 @@
     "prettier": "^2.8.4",
     "typescript": "^4.9.3",
     "vite": "^4.1.0"
-  }
+  },
+  "homepage": "https://pccclearclinic.github.io/form-filling/"
 }
