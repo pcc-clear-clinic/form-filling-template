@@ -23,8 +23,7 @@ export default function validate(
       if (
         field.required &&
         fieldState[field.id] === "" &&
-        ((form === "feeWaiver" && field.feeWaiverFields) ||
-          (form === "statewidePacket" && field.statewidePacketFields))
+        ((form === "feeWaiver" && field.pdfFields))
       ) {
         foundInvalid = true;
         setInvalidState((oldState: TInvalidState) => ({

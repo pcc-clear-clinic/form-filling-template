@@ -8,46 +8,8 @@ import {
   fillAndDownloadStatewidePacket,
 } from "./fillAndDownload";
 import validate, { INITIAL_INVALID_STATE } from "./validate";
-
-const COUNTIES = [
-  "",
-  "Baker",
-  "Benton",
-  "Clackamas",
-  "Clatsop",
-  "Columbia",
-  "Coos",
-  "Crook",
-  "Curry",
-  "Deschutes",
-  "Douglas",
-  "Gilliam",
-  "Grant",
-  "Harney",
-  "Hood River",
-  "Jackson",
-  "Jefferson",
-  "Josephine",
-  "Klamath",
-  "Lake",
-  "Lane",
-  "Lincoln",
-  "Linn",
-  "Malheur",
-  "Marion",
-  "Morrow",
-  "Multnomah",
-  "Polk",
-  "Sherman",
-  "Tillamook",
-  "Umatilla",
-  "Union",
-  "Wallowa",
-  "Wasco",
-  "Washington",
-  "Wheeler",
-  "Yamhill",
-];
+import { COUNTIES } from "../components/constants";
+import { handleChange, handleCheckboxChange } from "../components/inputHandlers";
 
 export type Field = {
   id: string;
@@ -562,23 +524,7 @@ function NameAndGenderForm() {
   const [anyInputsInvalid, setAnyInputsInvalid] = useState(false);
   const [isValidationDisabled, setIsValidationDisabled] = useState(false);
 
-  const handleChange = (e: React.BaseSyntheticEvent) => {
-    setFieldState((oldState: any) => {
-      return {
-        ...oldState,
-        [e.target.id]: e.target.value,
-      };
-    });
-  };
 
-  const handleCheckboxChange = (fieldId: string) => {
-    setFieldState((oldState: any) => {
-      return {
-        ...oldState,
-        [fieldId]: !oldState[fieldId],
-      };
-    });
-  };
   const handleFeeWaiverSubmit = () => {
     if (
       !isValidationDisabled &&
@@ -619,8 +565,8 @@ function NameAndGenderForm() {
                         checkbox={field.checkbox}
                         selectionList={field.selectionList}
                         disabled={field.disabled}
-                        handleChange={handleChange}
-                        handleCheckboxChange={handleCheckboxChange}
+                        handleChange={(e)=>handleChange(e, setFieldState)}
+                        handleCheckboxChange={(e)=>handleCheckboxChange(e, setFieldState)}
                         fieldState={fieldState}
                         invalidState={invalidState}
                         tooltip={field.tooltip}

@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { PDFDocument } from "pdf-lib";
-import { FLATTENED_FIELDS, Field } from "./NameAndGenderForm";
+import { FLATTENED_FIELDS, Field } from ".";
 
 const FEE_WAIVER_CHECKED_LIST = [
   "plaintiffpetitioner", // CHECKED "I am the plaintiff"
