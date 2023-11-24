@@ -38,6 +38,6 @@
 4.  You can make multiple commits while working on a particular feature, and this can be useful to break up changes into steps that might be easier for another developer to understand.
 5.  When ready for review, run `git push origin branch-name` to push the latest commited changes on your local branch to a branch on github.
 6.  On github.com, open a pull request and tag another team member for review.
-7.  When the changes are approved, hit "merge pull request" on the PR page.
+7.  When the changes are approved, hit "merge pull request" on the PR page. A github action triggers whenever `main` is updated, to push changes to the live site.
 8.  In your local project, checkout the main branch with `git checkout main` and pull the changes that have been merged in with `git pull origin main`
 9.  Checkout a new branch to do more work.
