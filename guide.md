@@ -19,9 +19,9 @@
     - compile the file into js by running this in the project root: `npx tsc`
     - run it with `node dist/examinePdf.js`
 2.  In the new `index.tsx` file, Rename `EvictionFormField` and its child field to something appropriate.
-3.  For a new form, rename `EVICTION_FIELDS_IN_SECTIONS` and populate it with the field the user needs to input in the app.
+3.  For a new form, rename `EVICTION_FIELDS_IN_SECTIONS` and populate it with the fields the user needs to input in the app.
 
-- In the variable definition, the type signature `: [React.ReactNode, EvictionFormField[]]` indicates that the allowed type format is an array pairs of `React.ReactNode` type and an array of `EvictionFormField` type. The first is the section header: `React.ReactNode` type is anything that renders as valid react code, including raw text. The react type means that a section header can be more complex than just text, namely have an attached tooltip or something. See NameAndGenderForm for an example of this, as the "Waiver Requirements" header.
+- In the variable definition, the type signature `: [React.ReactNode, EvictionFormField[]]` indicates that the allowed type format is an array of pairs of `React.ReactNode` type and an array of `EvictionFormField` type. The first is the section header: `React.ReactNode` type is anything that renders as valid react code, including raw text. The react type means that a section header can be more complex than just text, namely have an attached tooltip or something. See NameAndGenderForm for an example of this, as the "Waiver Requirements" header.
 - `EvictionFormField` is the type that specifies the fields in each entry that this data structure can contain. See comments on the `Field` type in `inputHandlersAndTypes.ts` for explanations of what goes into this field definition. The type `EvictionFormField = Field & {...}` means that `EvictionFormField` is a subtype of `Field`; it contains all the variables in `Field` and any extra that are defined here.
 - `INITIAL_FIELD_STATE` needs to contain an entry for each field in the list of fields defined above.
 
@@ -36,7 +36,7 @@
 2.  Stage changed files for a commit with `git add path/to/file`. If you want to add everything you can use `git add .`.
 3.  Commit changes with `git commit -m "your message"`, with a commit messages that describes the changes made
 4.  You can make multiple commits while working on a particular feature, and this can be useful to break up changes into steps that might be easier for another developer to understand.
-5.  When ready for review, run `git push origin [branch-name]` to push the latest commited changes on your local branch to a branch on github.
+5.  When ready for review, run `git push origin branch-name` to push the latest commited changes on your local branch to a branch on github.
 6.  On github.com, open a pull request and tag another team member for review.
 7.  When the changes are approved, hit "merge pull request" on the PR page.
 8.  In your local project, checkout the main branch with `git checkout main` and pull the changes that have been merged in with `git pull origin main`
