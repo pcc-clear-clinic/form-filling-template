@@ -6,15 +6,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build && cp -r pdfs dist",
-    "preview": "vite preview",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d dist"
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.6",
-    "@emotion/styled": "^11.10.6",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.9",
-    "@mui/material": "^5.11.10",
+    "@mui/material": "^5.14.18",
     "date-fns": "^2.29.3",
     "moment": "^2.29.4",
     "pdf-lib": "^1.17.1",

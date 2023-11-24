@@ -543,7 +543,7 @@ function NameAndGenderForm() {
     <div className="FormFillingPage">
       <div className="row">
         <FillableFieldsSet
-          FIELDS_IN_SECTIONS={[]}
+          FIELDS_IN_SECTIONS={FIELDS_IN_SECTIONS}
           fieldState={fieldState}
           invalidState={invalidState}
           setFieldState={setFieldState}
