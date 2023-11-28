@@ -18,6 +18,7 @@
     - update the url to the new file in the script. The url you already see there won't have the new file in that folder yet until you commit and push changes (see below)
     - compile the file into js by running this in the project root: `npx tsc`
     - run it with `node dist/examinePdf.js`
+    - this creates a new file in the project folder called "filledPdf.pdf" which fills each field with that field's name.
 2.  In the new `index.tsx` file, Rename `EvictionFormField` and its child field to something appropriate.
 3.  For a new form, rename `EVICTION_FIELDS_IN_SECTIONS` and populate it with the fields the user needs to input in the app.
 
