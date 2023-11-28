@@ -14,7 +14,7 @@
 
 ## To customize a form
 
-1.  use the utility script examinePdf.ts to see the names of the pdf fields in the file. To do this:
+1.  use the utility script `src/examinePdf.ts` to see the names of the pdf fields in the file. To do this:
     - update the url to the new file in the script. The url you already see there won't have the new file in that folder yet until you commit and push changes (see below)
     - compile the file into js by running this in the project root: `npx tsc`
     - run it with `node dist/examinePdf.js`
