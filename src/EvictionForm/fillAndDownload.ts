@@ -6,7 +6,7 @@ import { EVICTION_FLATTENED_FIELDS, EvictionFormField } from ".";
 
 const CHECKED_LIST : string[] = [
   // List the names of fields that should be checked.
-  "Maik"// "example1",
+  "Maik"
 ];
 
 export async function fillAndDownloadEvictionExpungement(fieldState: any) {
