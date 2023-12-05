@@ -44,6 +44,6 @@ export async function fillAndDownloadEvictionExpungement(fieldState: any) {
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
   const link = document.createElement("a");
   link.href = window.URL.createObjectURL(blob);
-  link.download = `${casenumber.value}SetAside.pdf`;
+  link.download = `${fieldState["casenumber"]}_SetAside.pdf`;
   link.click();
 }
