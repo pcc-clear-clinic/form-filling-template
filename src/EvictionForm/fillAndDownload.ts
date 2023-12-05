@@ -2,9 +2,11 @@ import { format } from "date-fns";
 import { PDFDocument } from "pdf-lib";
 import { EVICTION_FLATTENED_FIELDS, EvictionFormField } from ".";
 
+
+
 const CHECKED_LIST : string[] = [
   // List the names of fields that should be checked.
-  // "example1",
+  "Maik"
 ];
 
 export async function fillAndDownloadEvictionExpungement(fieldState: any) {
@@ -42,6 +44,6 @@ export async function fillAndDownloadEvictionExpungement(fieldState: any) {
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
   const link = document.createElement("a");
   link.href = window.URL.createObjectURL(blob);
-  link.download = "feeWaiverFilled.pdf";
+  link.download = `${caseNumber}.pdf`;
   link.click();
 }
