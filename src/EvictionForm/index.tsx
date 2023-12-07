@@ -97,7 +97,7 @@ export const EVICTION_FIELDS_IN_SECTIONS: [
     },
     {
       id: "judgementDate",
-      label: "Date of Judgement",
+      label: "Date of Judgment",
       evictionPdfFields: ["which is more than"],
       disabled: (fieldState) => !fieldState.restitution,
     },
@@ -112,8 +112,8 @@ export const EVICTION_FIELDS_IN_SECTIONS: [
       id: "stipulated",
       label: "Stipulated Agreement",
       checkbox: true,
-      evictionPdfFields: ["stipulation agreement ", "I have satisfied all terms of the agreement and paid any money required"],
-      tooltip: "Check that client has satisfied all the terms of the agreement. If they haven't this could prompt the landlord to file a declaration of non-compliance to evict the tenant.",
+      evictionPdfFields: ["stipulation agreement", "I have satisfied all terms of the agreement and paid any money required"],
+      tooltip: "Check that the participant has satisfied all the terms of the agreement. If they haven't this could prompt the landlord to file a declaration of non-compliance to evict the tenant.",
     },
     
   ]
@@ -123,7 +123,7 @@ export const EVICTION_FIELDS_IN_SECTIONS: [
   [
     {
       id: "attorneyName",
-      label: "Attoreny Name",
+      label: "Attorney Name",
       evictionPdfFields: ["Attorney Name", "Text4", "Text5"],
     },
     {
