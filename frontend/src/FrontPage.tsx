@@ -23,7 +23,7 @@ const HomePage = () => {
           marginBottom: 2,
         }}
       >
-        PCC CLEAR Clinic form-filling
+        PCC CLEAR Clinic form filling
       </Typography>
       <Box
         sx={{
