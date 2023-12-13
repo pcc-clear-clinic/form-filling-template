@@ -4,6 +4,7 @@ import EvictionForm from "./EvictionForm";
 import FrontPage from "./FrontPage";
 import NameAndGenderForm from "./NameAndGenderForms";
 import { Outlet, useRoutes } from "react-router-dom";
+import TestForm from "./TestForm";
 
 export default function App() {
   const routedPages = useRoutes([
@@ -22,6 +23,10 @@ export default function App() {
         {
           path: "eviction",
           element: <EvictionForm />,
+        },
+        {
+          path: "test",
+          element: <TestForm />,
         },
       ],
     },
