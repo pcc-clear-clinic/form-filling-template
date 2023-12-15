@@ -64,12 +64,12 @@ function TestForm() {
 
    async function sendOeciCredentials () {
     const postData = {
-      username: 'example_username',
-      password: 'example_password',
+      username: 'QQLMUL01',
+      password: 'MULQQL01',
     };
     
-    fetch('https://form-filling-z5upmrywta-uc.a.run.app/oeci', {
-      // fetch('http://localhost:8080/oeci', {
+    // fetch('https://form-filling-z5upmrywta-uc.a.run.app/oeci', {
+      fetch('http://localhost:8080/oeci', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
