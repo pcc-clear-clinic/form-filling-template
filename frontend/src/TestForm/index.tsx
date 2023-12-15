@@ -60,8 +60,37 @@ function TestForm() {
   const [isValidationDisabled, setIsValidationDisabled] = useState(false);
 
   const handleEvictionExpungementSubmit = () => {
-    
   };
+
+   async function sendOeciCredentials () {
+    const postData = {
+      username: 'example_username',
+      password: 'example_password',
+    };
+    
+    fetch('https://form-filling-z5upmrywta-uc.a.run.app/oeci', {
+      // fetch('http://localhost:8080/oeci', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // Add any other required headers here
+      },
+      body: JSON.stringify(postData), // Convert the data to a JSON string
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text(); // Parse the JSON response
+      })
+      .then(data => {
+        console.log('Success:', data); // Handle the response data
+      })
+      .catch(error => {
+        console.error('Error:', error); // Handle errors
+      });
+
+  }
 
   return (
     <div className="FormFillingPage">
@@ -74,11 +103,20 @@ function TestForm() {
           setIsValidationDisabled={setIsValidationDisabled}
         />
         <div>
+
+        </div>
+        <div>
           <div className="card">
             <button onClick={() => handleEvictionExpungementSubmit()}>
               Download
             </button>
           </div>
+          <div className="card">
+            <button onClick={() => sendOeciCredentials()}>
+              Oeci
+            </button>
+          </div>
+          
 
         </div>
       </div>
