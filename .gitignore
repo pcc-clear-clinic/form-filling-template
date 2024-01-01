@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 
 filledForm.pdf
+
+__pycache__
