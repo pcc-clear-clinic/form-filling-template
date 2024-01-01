@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import FillableFieldsSet from "../components/FillableFieldsSet";
 import { Button, Checkbox } from "@mui/material";
 import { Field } from "../components/inputHandlersAndTypes";
+import axios, { AxiosResponse } from "axios";
+import OeciLogin from "../components/OeciLogin";
 
 export type EvictionFormField = Field & {
   evictionPdfFields?: string[];
@@ -15,7 +17,7 @@ export const EVICTION_FIELDS_IN_SECTIONS: [
     "Case Information",
     [
       {
-        id: "casenumber",
+        id: "caseNumber",
         label: "Case Number",
         required: true,
         evictionPdfFields: ["Case No"],
@@ -37,6 +39,27 @@ export const EVICTION_FIELDS_IN_SECTIONS: [
       },
     ],
   ],
+  [
+    "Plaintiff Information",
+    [
+      {
+        id: "plaintiff1",
+        label: "Plaintiff 1",
+      },
+      {
+        id: "plaintiff1Address",
+        label: "Plaintiff 1 Address",
+      },
+      {
+        id: "plaintiff2",
+        label: "Plaintiff 2",
+      },
+      {
+        id: "plaintiff2Address",
+        label: "Plaintiff 2 Address",
+      },
+    ],
+  ],
 ];
 
 // This is just another way to access the same information, but in a single array instead of in sections.
@@ -44,13 +67,13 @@ export const EVICTION_FLATTENED_FIELDS: EvictionFormField[] =
   EVICTION_FIELDS_IN_SECTIONS.flatMap(([, fields]) => fields);
 
 const INITIAL_FIELD_STATE = {
-  casenumber: "",
+  caseNumber: "",
   attorneyName: "",
   barNumber: "",
 };
 
 const DEMO_INITIAL_FIELD_STATE = {
-  casenumber: "23LT",
+  caseNumber: "23LT04550",
   attorneyName: "Alena Tupper",
   barNumber: "111869",
 };
@@ -59,41 +82,49 @@ function TestForm() {
   const [fieldState, setFieldState] = useState<any>(INITIAL_FIELD_STATE);
   const [isValidationDisabled, setIsValidationDisabled] = useState(false);
 
-  const handleEvictionExpungementSubmit = () => {
-  };
+  const handleEvictionExpungementSubmit = () => {};
 
-   async function sendOeciCredentials () {
+  async function sendOeciCredentials() {
     const postData = {
-      username: 'QQLMUL01',
-      password: 'MULQQL01',
+      case_number: fieldState["caseNumber"],
     };
-    
-    // fetch('https://form-filling-z5upmrywta-uc.a.run.app/oeci', {
-      fetch('http://localhost:8080/oeci', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        // Add any other required headers here
-      },
-      body: JSON.stringify(postData), // Convert the data to a JSON string
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text(); // Parse the JSON response
-      })
-      .then(data => {
-        console.log('Success:', data); // Handle the response data
-      })
-      .catch(error => {
-        console.error('Error:', error); // Handle errors
-      });
 
+    console.log(postData);
+    fetch("/api/oeci_scrape/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(postData),
+    })
+      .then(async (response) => {
+        console.log("fetch response", response);
+
+        if (!response.ok) {
+          throw new Error(await response.text());
+        }
+
+        return response.text();
+      })
+      .then((data) => {
+        console.log("Success:", data); // Handle the response data
+        const jsonData = JSON.parse(data);
+        const newData = {
+          plaintiff1: jsonData.plaintiffs[0],
+          plaintiff1Address: jsonData.addresses[0].join(", "),
+          plaintiff2: jsonData.plaintiffs[1],
+          plaintiff2Address: jsonData.addresses[1].join(", ")
+        }
+        setFieldState({...fieldState, ...newData})
+      })
+      .catch((error) => {
+        alert(error); // Handle errors
+      });
   }
 
   return (
     <div className="FormFillingPage">
+      <OeciLogin />
       <div className="row">
         <FillableFieldsSet
           FIELDS_IN_SECTIONS={EVICTION_FIELDS_IN_SECTIONS}
@@ -103,21 +134,14 @@ function TestForm() {
           setIsValidationDisabled={setIsValidationDisabled}
         />
         <div>
-
-        </div>
-        <div>
           <div className="card">
             <button onClick={() => handleEvictionExpungementSubmit()}>
               Download
             </button>
           </div>
           <div className="card">
-            <button onClick={() => sendOeciCredentials()}>
-              Oeci
-            </button>
+            <button onClick={() => sendOeciCredentials()}>Fetch</button>
           </div>
-          
-
         </div>
       </div>
       <div>
