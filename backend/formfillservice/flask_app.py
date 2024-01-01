@@ -21,7 +21,7 @@ logger.info("app loaded")
 @app.route("/health")
 def hello_world():
     logger.info("called hello world")
-    return "Hello world"
+    return "Hello world changed"
 
 app.register_blueprint(oeci_scrape.bp)
 app.register_blueprint(oeci_login.bp)
