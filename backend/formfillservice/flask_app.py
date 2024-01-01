@@ -23,6 +23,9 @@ def hello_world():
     logger.info("called hello world")
     return "Hello world"
 
+app.register_blueprint(oeci_scrape.bp)
+app.register_blueprint(oeci_login.bp)
+
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>", methods=["GET", "HEAD", "OPTIONS"])
 def try_files_static_index(path):
@@ -35,8 +38,5 @@ def try_files_static_index(path):
         return app.send_static_file("index.html")
 
 
-
-app.register_blueprint(oeci_scrape.bp)
-app.register_blueprint(oeci_login.bp)
 if __name__ == "__main__":
     app.run()
