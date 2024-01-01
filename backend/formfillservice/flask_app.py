@@ -26,7 +26,13 @@ def hello_world():
 app.register_blueprint(oeci_scrape.bp)
 app.register_blueprint(oeci_login.bp)
 
-@app.route("/", defaults={"path": ""})
+
+@app.route("/")
+def blank(): 
+    logger.info("called /")
+    return "text: /"
+
+@app.route("/blank")
 def blank(): 
     logger.info("called blank")
     return "blank"
