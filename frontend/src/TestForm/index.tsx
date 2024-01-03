@@ -82,7 +82,7 @@ function TestForm() {
   const [fieldState, setFieldState] = useState<any>(INITIAL_FIELD_STATE);
   const [isValidationDisabled, setIsValidationDisabled] = useState(false);
 
-  const handleEvictionExpungementSubmit = () => {};
+  const handleSubmit = () => {};
 
   async function sendOeciCredentials() {
     const postData = {
@@ -135,12 +135,12 @@ function TestForm() {
         />
         <div>
           <div className="card">
-            <button onClick={() => handleEvictionExpungementSubmit()}>
-              Download
+            <button onClick={() => handleSubmit()}>
+              Download PDF
             </button>
           </div>
           <div className="card">
-            <button onClick={() => sendOeciCredentials()}>Fetch</button>
+            <button onClick={() => sendOeciCredentials()}>Fetch Case Details</button>
           </div>
         </div>
       </div>
