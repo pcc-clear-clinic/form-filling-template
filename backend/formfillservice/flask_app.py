@@ -28,15 +28,6 @@ app.register_blueprint(oeci_login.bp)
 
 
 @app.route("/")
-def blank(): 
-    logger.info("called /")
-    return "text: /"
-
-@app.route("/blank")
-def blank(): 
-    logger.info("called blank")
-    return "blank"
-
 @app.route("/<path:path>", methods=["GET", "HEAD", "OPTIONS"])
 def try_files_static_index(path):
     logger.info(f"serving file: {path}")
