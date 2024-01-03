@@ -3,7 +3,7 @@ import os
 from flask import Flask
 from formfillservice.endpoints import oeci_scrape
 from formfillservice.endpoints import oeci_login
-
+import re
 
 FRONTEND_BUILD_DIR = os.path.abspath(os.path.join(
     os.path.dirname(__file__), "..", "..", "frontend", "dist"))
@@ -31,8 +31,15 @@ app.register_blueprint(oeci_login.bp)
 @app.route("/<path:path>", methods=["GET", "HEAD", "OPTIONS"])
 def try_files_static_index(path):
     logger.info(f"serving file: {path}")
+    pattern = r"(?:form-filling\/)?(.*)"
+    match = re.search(pattern, path)
+    if match:
+        path = match.group(1)
+        logger.info(f"new path: {path}")
 
     static_path = os.path.join(app.static_folder, path)
+    print(FRONTEND_BUILD_DIR)
+    print(os.listdir(FRONTEND_BUILD_DIR))
     if os.path.exists(static_path) and not os.path.isdir(static_path):
         return app.send_static_file(path)
     else:
