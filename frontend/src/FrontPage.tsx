@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Typography, Container, Box } from '@mui/material';
 
+const gcloud_url = "https://form-filling-z5upmrywta-uc.a.run.app";
 const HomePage = () => {
   return (
     <Container
@@ -34,7 +35,7 @@ const HomePage = () => {
       >
         <Button
           component={Link}
-          to="/gender"
+          to={`${gcloud_url}/#/gender`}
           variant="contained"
           color="primary"
           size="large"
@@ -43,7 +44,7 @@ const HomePage = () => {
         </Button>
         <Button
           component={Link}
-          to="/eviction"
+          to={`${gcloud_url}/#/eviction`}
           variant="contained"
           color="primary"
           size="large"
