@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import FillableFieldsSet from "../components/FillableFieldsSet";
 import { Button, Checkbox } from "@mui/material";
 import { Field } from "../components/inputHandlersAndTypes";
-import axios, { AxiosResponse } from "axios";
 import OeciLogin from "../components/OeciLogin";
 
 export type EvictionFormField = Field & {
@@ -84,7 +83,7 @@ function TestForm() {
 
   const handleSubmit = () => {};
 
-  async function sendOeciCredentials() {
+  async function fetchPlaintiffInfo() {
     const postData = {
       case_number: fieldState["caseNumber"],
     };
@@ -140,7 +139,7 @@ function TestForm() {
             </button>
           </div>
           <div className="card">
-            <button onClick={() => sendOeciCredentials()}>Fetch Case Details</button>
+            <button onClick={() => fetchPlaintiffInfo()}>Fetch Case Details</button>
           </div>
         </div>
       </div>
