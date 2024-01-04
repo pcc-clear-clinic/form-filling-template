@@ -19,6 +19,7 @@ def get_case_page(session, case_number):
         "https://publicaccess.courts.oregon.gov/PublicAccessLogin/Search.aspx?ID=200",
         data=to_search_payload,
     )
+    logger.info(f"case_number from request:{case_number}" )
 
     soup = BeautifulSoup(to_search_response.text, "html.parser")
 

@@ -35,7 +35,6 @@ def try_files_static_index(path):
     match = re.search(pattern, path)
     if match:
         path = match.group(1)
-        logger.info(f"new path: {path}")
 
     static_path = os.path.join(app.static_folder, path)
     print(FRONTEND_BUILD_DIR)

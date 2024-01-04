@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Typography, Container, Box } from '@mui/material';
 
-const gcloud_url = "https://form-filling-z5upmrywta-uc.a.run.app";
 const HomePage = () => {
+  console.log(import.meta.env.DEV)
+  const gcloud_url = "https://form-filling-z5upmrywta-uc.a.run.app";
+
   return (
     <Container
       sx={{
