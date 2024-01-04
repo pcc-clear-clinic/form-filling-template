@@ -111,8 +111,8 @@ function TestForm() {
         const newData = {
           plaintiff1: jsonData.plaintiffs[0],
           plaintiff1Address: jsonData.addresses[0].join(", "),
-          plaintiff2: jsonData.plaintiffs[1],
-          plaintiff2Address: jsonData.addresses[1].join(", ")
+          // plaintiff2: jsonData.plaintiffs[1] || "",
+          // plaintiff2Address: (jsonData.addresses[1] || "").join(", ")
         }
         setFieldState({...fieldState, ...newData})
       })
