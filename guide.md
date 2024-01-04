@@ -1,7 +1,8 @@
 ## Project setup
 
 1.  Always do new work on a git branch other than the `main` branch. First, make sure you're on the `main` branch with `git checkout main`, and pull latest changes with `git pull origin main`. Then run `git checkout -b branch-name`. This can be a short name indicating what you're working on, like "finish-eviction-form"
-2.  Run `npm run dev` in the project root to launch the project locally. You can navigate to `localhost:3000` to view your latest changes. It's a hot-reload server, so it automatically updates to show the latest code.
+2.  Run `npm run dev` in `frontend/` to launch the frontend locally. You can navigate to `localhost:3000` to view your latest changes. It's a hot-reload server, so it automatically updates to show the latest code.
+3. Run `gunicorn --bind :8080 --workers 1 --threads 8 --timeout 0 --reload formfillservice.flask_app:app` in `backend/` to launch the backend server locally.
 
 ## To add a new form:
 
