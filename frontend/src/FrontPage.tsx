@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Typography, Container, Box } from '@mui/material';
 
 const FrontPage = () => {
-  const backend_url = import.meta.env.DEV ? "http://localhost:3000" : "https://form-filling-z5upmrywta-uc.a.run.app";
+  const backend_url = import.meta.env.DEV ? "http://localhost:3000" : "https://form-filling-z5upmrywta-uc.a.run.app/#";
   console.log(backend_url)
   return (
     <Container
