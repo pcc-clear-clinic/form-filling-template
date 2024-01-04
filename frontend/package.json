@@ -1,6 +1,6 @@
 {
   "proxy": "http://expungeservice:8080",
-  "name": "clear-form",
+  "name": "form-filling",
   "private": true,
   "version": "0.0.0",
   "type": "module",

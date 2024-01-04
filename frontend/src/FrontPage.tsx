@@ -2,10 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Typography, Container, Box } from '@mui/material';
 
-const HomePage = () => {
-  console.log(import.meta.env.DEV)
-  const gcloud_url = "https://form-filling-z5upmrywta-uc.a.run.app";
-
+const FrontPage = () => {
+  const backend_url = import.meta.env.DEV ? "http://localhost:3000" : "https://form-filling-z5upmrywta-uc.a.run.app";
+  console.log(backend_url)
   return (
     <Container
       sx={{
@@ -37,7 +36,7 @@ const HomePage = () => {
       >
         <Button
           component={Link}
-          to={`${gcloud_url}/#/gender`}
+          to={`${backend_url}/gender`}
           variant="contained"
           color="primary"
           size="large"
@@ -46,7 +45,7 @@ const HomePage = () => {
         </Button>
         <Button
           component={Link}
-          to={`${gcloud_url}/#/eviction`}
+          to={`${backend_url}/eviction`}
           variant="contained"
           color="primary"
           size="large"
@@ -58,4 +57,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default FrontPage;
