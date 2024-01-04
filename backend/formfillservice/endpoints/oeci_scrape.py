@@ -107,7 +107,7 @@ def get_case_page(session, case_number):
     return case_page_response.text
 
 
-bp = Blueprint("oeci_scrape", __name__, url_prefix="/oeci_scrape")
+bp = Blueprint("api/oeci_scrape", __name__, url_prefix="/api/oeci_scrape")
 
 
 def get_credentials_from_request():

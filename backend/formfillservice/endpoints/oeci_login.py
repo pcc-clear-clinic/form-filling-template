@@ -24,7 +24,7 @@ def attempt_login(session, username, password):
     return "Case Records" in login_response.text
 
 
-bp = Blueprint("oeci_login", __name__, url_prefix="/oeci_login")
+bp = Blueprint("api/oeci_login", __name__, url_prefix="/api/oeci_login")
 
 
 @bp.route("/", methods=["POST"])
