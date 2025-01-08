@@ -39,7 +39,14 @@ export const FIELDS_IN_SECTIONS: [React.ReactNode, NameAndGenderFormField[]][] =
           "DefendantRespondent",
           "Name printed",
         ],
-        statewidePacketFields: ["Petitioner current name"],
+        statewidePacketFields: [
+          "Petitioner current name 1",
+          "Petitioner current name 2",
+          "Petitioner current name 3",
+          "Petitioner current name 4",
+          "Petitioner current name 5",
+          "Petitioner current name 6",
+        ],
       },
       {
         id: "dob",
@@ -83,6 +90,7 @@ export const FIELDS_IN_SECTIONS: [React.ReactNode, NameAndGenderFormField[]][] =
         statewidePacketFields: [
           "NAME",
           "changing my name use complete names First Middle Last",
+          "Petitioners name is changed use complete names First Middle Last"
         ],
       },
       {

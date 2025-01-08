@@ -135,11 +135,7 @@ export async function fillAndDownloadStatewidePacket(fieldState: any) {
           }
         } else if (field.id === "gender") {
           if (fieldState[field.id] !== "") {
-            field.statewidePacketFields?.forEach((statewidePacketField) =>
-              form
-                .getRadioGroup(statewidePacketField)
-                .select(fieldState[field.id]),
-            );
+            form.getCheckBox(`${fieldState[field.id]}`).check();
             form.getCheckBox(`${fieldState[field.id]}_2`).check();
           }
         } else {
@@ -149,6 +145,14 @@ export async function fillAndDownloadStatewidePacket(fieldState: any) {
       });
     }
   });
+
+  if(!fieldState["changeOfName"]) {
+    let formField = form.getTextField("Petitioner current name 2");
+    formField.setText("");
+    formField = form.getTextField("Petitioner current name 5");
+    formField.setText("");
+
+  }
 
   const todaysDateField = form.getTextField("Date");
   todaysDateField.setText(format(new Date(), "MM/dd/yyyy"));
